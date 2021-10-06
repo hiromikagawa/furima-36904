@@ -29,7 +29,7 @@ _h_as_many :card
 | region_id   | integer    | null: false         |
 | prise       | integer    | null: false         |
 | use_id      | references | foreign_key: true   |
-| seller      | string     |                     |
+| seller_id   | string     |                     |
 
 
 ### Association
@@ -40,12 +40,12 @@ _has_one :card
 
 ## card テーブル
 
-| Column     | Type       | Options           |
-|------------|------------|-------------------|
-| prise      | integer    | null: false       |
-| items_id   | references | foreign_key: true |
-| user_id    | references | foreign_key: true |
-| buyer      | string     |                   |
+| Column   | Type       | Options           |
+|----------|------------|-------------------|
+| prise    | integer    | null: false       |
+| items_id | references | foreign_key: true |
+| user_id  | references | foreign_key: true |
+| buyer_id | string     |                   |
 
 ### Association
 
