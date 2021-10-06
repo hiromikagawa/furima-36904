@@ -1,6 +1,6 @@
 # README
 
-## user テーブル
+## users テーブル
 
 | Column             | Type   | Options                   |
 |--------------------|--------|---------------------------|
@@ -36,7 +36,7 @@
 ### Association
 
  belongs_to :user
- has_one :cards
+ has_one :card
 
 
 ## cards テーブル
@@ -48,12 +48,12 @@
 
 ### Association
 
- belongs_to :items
- has_one  :deliverys
+ belongs_to :item
+ has_one  :delivery
  belongs_to :user
  
 
-## deliverysテーブル
+## deliveryiesテーブル
 
 | Column        | Type       | Options           |
 |---------------|------------|-------------------|
@@ -62,10 +62,10 @@
 | ctiy          | string     | null: false       |
 | address       | string     | null: false       |
 | building_name | string     |                   |
-| phone_number  | integer    | null: false       |
+| phone_number  | string     | null: false       |
 | card          | references | foreign_key: true |
 
 ### Association
 
- belongs_to :cards
+ belongs_to :card
 
