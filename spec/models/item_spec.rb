@@ -2,16 +2,17 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
+
     @item = FactoryBot.build(:item)
   end
 
-  describe '商品出品情報が保存' do
-    context '商品が出品できる場合' do
-      it '全ての情報が揃っている場合登録できる' do
-        expect(@item).to be_valid
+    describe '商品出品情報が保存' do
+      context '商品が出品できる場合' do
+        it '全ての情報が揃っている場合登録できる' do
+          expect(@item).to be_valid
+        end
       end
-    end
-    context '商品のが出品できない場合' do
+     context '商品のが出品できない場合' do
       it '商品画像を一枚つけるないと保存できない' do
         @item.image = nil
         @item.valid?
@@ -58,12 +59,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Prise  is out of setting range')
       end
       it '価格は¥300以下の場合の数字を入力した場合保存されない' do
-        @item.prise = '299'
+        @item.prise = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Prise  is out of setting range')
       end
       it '価格は、¥9999999以上の数字を入力した場合保存されない' do
-        @item.prise = '10000000'
+        @item.prise = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Prise  is out of setting range')
       end
@@ -72,6 +73,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Prise is invalid. Input half-width characters')
       end
+       it 'user_idが紐付いていないと出品できない' do
+       @item.user = nil
+       @item.valid?
+       expect(@item.errors.full_messages).to include('User must exist')
+       end
+      end
     end
   end
-end
