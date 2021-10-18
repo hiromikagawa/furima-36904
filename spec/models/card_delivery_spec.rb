@@ -80,6 +80,11 @@ RSpec.describe CardDelivery, type: :model do
         @card_delivery.valid?
         expect(@card_delivery.errors.full_messages).to include("Item can't be blank")
         end
+        it "tokenが空では、登録できないこと"do
+          @card_delivery.token = nil
+          @card_delivery.valid?
+          expect(@card_delivery.errors.full_messages).to include("Token can't be blank")
+        end
       end
     end
   end

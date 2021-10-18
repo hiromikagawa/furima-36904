@@ -1,6 +1,6 @@
 class CardDelivery
   include ActiveModel::Model
-  attr_accessor :post_code, :prefecture_id, :city, :address, :phone_number, :building_name, :user_id, :item_id,:card_id,:hoge
+  attr_accessor :post_code, :prefecture_id, :city, :address, :phone_number, :building_name, :user_id, :item_id,:card_id,:token
   with_options presence: true do
     validates :user_id
     validates :item_id
@@ -9,6 +9,7 @@ class CardDelivery
     validates :address
     validates :phone_number, format: {with: /\A\d{10}\z|\A\d{11}\z/, massage:"is invalid. Input only number"}
     validates :prefecture_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :token
   end
     validate :building_name
   def save
