@@ -1,7 +1,12 @@
 class CardsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @card_delivery = CardDelivery.new
     @item = Item.find(params[:item_id])
+    if  @item.user_id != current_user.id|| @item.cards != nil
+      redirect_to root_path
+    end
   end
 
   def create
