@@ -84,6 +84,11 @@ RSpec.describe CardDelivery, type: :model do
           @card_delivery.valid?
           expect(@card_delivery.errors.full_messages).to include("Token can't be blank")
         end
+        it '・都道府県に「---」が選択されている場合は購入できない'do
+        @card_delivery.prefecture_id = 0
+        @card_delivery.valid?
+        expect(@card_delivery.errors.full_messages).to include("Prefecture can't be blank"
+        end
       end
     end
   end

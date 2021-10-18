@@ -12,7 +12,6 @@ class CardDelivery
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :token
   end
-  validate :building_name
   def save
     card = Card.create(user_id: user_id, item_id: item_id)
     Delivery.create(post_code: post_code, prefecture_id: prefecture_id, city: city, address: address,

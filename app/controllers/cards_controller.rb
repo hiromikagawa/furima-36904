@@ -1,16 +1,16 @@
 class CardsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_furima, only: [:index, :create]
+
 
   def index
     @card_delivery = CardDelivery.new
-    @item = Item.find(params[:item_id])
-    if  @item.user_id == current_user.id
+    if  @item.user_id == current_user.id||@item.cards.present?
       redirect_to root_path
     end
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @card_delivery = CardDelivery.new(card_params)
     if @card_delivery.valid?
       pay_item
@@ -28,6 +28,11 @@ class CardsController < ApplicationController
       user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
   end
+
+  def set_furima
+    @item = Item.find(params[:item_id])
+  end
+
 
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
