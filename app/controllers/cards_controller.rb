@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   def index
     @card_delivery = CardDelivery.new
     @item = Item.find(params[:item_id])
-    if  @item.user_id != current_user.id|| @item.cards != nil
+    if  @item.user_id == current_user.id
       redirect_to root_path
     end
   end
